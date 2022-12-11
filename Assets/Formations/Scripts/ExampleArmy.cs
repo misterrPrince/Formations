@@ -13,14 +13,15 @@ public class ExampleArmy : MonoBehaviour {
         }
         set => _formation = value;
     }
+    
 
-    [SerializeField] private GameObject _unitPrefab;
+    [SerializeField] private SimpleAi _unitPrefab;
     [SerializeField] private float _unitSpeed = 2;
     [SerializeField] List<FormationBase> Formations;
     int index = 0;
 
-    private readonly List<GameObject> _spawnedUnits = new List<GameObject>();
-    private List<Vector3> _points = new List<Vector3>();
+    private readonly List<IPositonable > _spawnedUnits = new List<IPositonable>();
+    private List<Vector3> _points  = new List<Vector3>();
     private Transform _parent;
    
 
@@ -55,7 +56,8 @@ public class ExampleArmy : MonoBehaviour {
         }
 
         for (var i = 0; i < _spawnedUnits.Count; i++) {
-            _spawnedUnits[i].transform.position = Vector3.MoveTowards(_spawnedUnits[i].transform.position, transform.position + _points[i], _unitSpeed * Time.deltaTime);
+            
+            _spawnedUnits[i].SetPositon(_points[i]); 
         }
     }
 
@@ -70,7 +72,7 @@ public class ExampleArmy : MonoBehaviour {
         for (var i = 0; i < num; i++) {
             var unit = _spawnedUnits.Last();
             _spawnedUnits.Remove(unit);
-            Destroy(unit.gameObject);
+            unit.Disable();
         }
     }
 }
