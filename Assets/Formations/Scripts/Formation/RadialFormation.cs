@@ -22,16 +22,11 @@ public class RadialFormation : FormationBase {
                 var radius = _radius + ringOffset + j * _radiusGrowthMultiplier;
                 var x = Mathf.Cos(angle) * radius;
                 var z = Mathf.Sin(angle) * radius;
-
                 var pos = new Vector3(x, 0, z);
-
                 pos += GetNoise(pos);
-
                 pos *= _spread;
-
                 yield return pos;
             }
-
             ringOffset += _ringOffset;
         }
     }

@@ -7,19 +7,18 @@ using UnityEngine.AI;
 [RequireComponent (typeof (Animator))]
 public class SimpleAi : MonoBehaviour , IPositonable
 {  
-    NavMeshAgent _agent;
-    Animator _anim;
-    void Awake()
+    private NavMeshAgent _agent;
+    private Animator _anim;
+    private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
         _anim = GetComponent<Animator>();
     }
     
     
-    void Update()
+    private void Update()
     {
         ChekAnim(_agent.velocity.magnitude);
-        
     }
     public void Disable()
     {
@@ -29,7 +28,6 @@ public class SimpleAi : MonoBehaviour , IPositonable
     public void SetPositon(Vector3 val)
     {
         _agent.SetDestination(val);
-
     }
 
     public void ChekAnim(float val)
@@ -45,7 +43,6 @@ public class SimpleAi : MonoBehaviour , IPositonable
         {
             _anim.SetBool("walk",true);
             _anim.SetBool("idle" ,false);
-
         }
     }   
 }
